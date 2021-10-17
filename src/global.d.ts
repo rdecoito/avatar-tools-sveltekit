@@ -1,4 +1,5 @@
 /// <reference types="@sveltejs/kit" />
+import { NpcImportance } from './global';
 
 type MarkedFatigue<T extends NpcImportance> = T extends NpcImportance.MINOR ? 0 | 1
 	: T extends NpcImportance.MODERATE ? 0 | 1 | 2 | 3 | 4 | 5
@@ -26,9 +27,9 @@ export interface NonPlayerCharacter<T extends NpcImportance> {
 	/** A mapping between the names of possible conditions and whether the condition is marked */
 	conditions: Record<string, boolean>;
 	/** The amount of fatigue the NPC has marked */
-	fatigue: MarkedFatigue,
+	fatigue: MarkedFatigue;
 	/** The position of the NPCs balance in the direction of their principle */
-	balance: MarkedBalance
+	balance: MarkedBalance;
 }
 
 export const NpcStatMap: Record<NpcImportance, NpcStatus> = Object.freeze({
@@ -64,19 +65,4 @@ export interface NpcStatus<T extends NpcImportance> {
 	markedBalance: T extends NpcImportance.MINOR ? 0 | 1
 		: T extends NpcImportance.MODERATE ? 0 | 1 | 2
 		: 0 | 1 | 2 | 3;
-}
-
-export enum NpcImportance {
-	/**
-	 * An NPC who may participate in conversations or fights but is unlikely to reappear in the adventure
-	 */
-	MINOR = 'Minor',
-	/**
-	 * An NPC who may be the focus of a session, but likely not the focus of an entire adventure
-	 */
-	MODERATE = 'Moderate',
-	/**
-	 * An NPC who may be a significant recurring character and may be the focus of an adventure
-	 */
-	MAJOR = 'Major'
 }
