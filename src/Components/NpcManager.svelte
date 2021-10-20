@@ -6,18 +6,6 @@
 
 	export let npcs: Array<NonPlayerCharacter> = [];
 
-	// let npcs: NonPlayerCharacter[] = [
-	// 	{
-	// 		name: 'Geoff',
-	// 		importance: NpcImportance.MODERATE,
-	// 		conditions: [['Angry', false], ['Afraid', false], ['Foolish', false]],
-	// 		drive: 'To defeat his foes',
-	// 		principle: 'Serendipity',
-	// 		fatigue: 3,
-	// 		balance: 0
-	// 	}
-	// ];
-
 	const handleNewNpc = () => {
 		npcs.push({
 			name: '',
