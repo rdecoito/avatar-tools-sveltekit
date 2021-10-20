@@ -1,21 +1,20 @@
 /// <reference types="@sveltejs/kit" />
 
-type MinorImportance = 'Minor';
-type ModerateImportance = 'Moderate';
-type MajorImportance = 'Major';
+export type MinorImportance = 'Minor';
+export type ModerateImportance = 'Moderate';
+export type MajorImportance = 'Major';
+export type AnyNpcImportance = MinorImportance | ModerateImportance | MajorImportance;
 
-type AnyNpcImportance = MinorImportance | ModerateImportance | MajorImportance;
-
-type Fatigue<T extends NpcImportance> = T extends MinorImportance ? 0 | 1
+export type Fatigue<T extends NpcImportance> = T extends MinorImportance ? 0 | 1
 	: T extends ModerateImportance ? 0 | 1 | 2 | 3 | 4 | 5
 	: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-type Condition = [string, boolean];
-type Conditions<T extends AnyNpcImportance> = T extends MinorImportance ? [Condition]
+export type Condition = [string, boolean];
+export type Conditions<T extends AnyNpcImportance> = T extends MinorImportance ? [Condition]
 	: T extends ModerateImportance ? [Condition, Condition, Condition]
 	: [Condition, Condition, Condition, Condition, Condition]
 
-type Balance<T extends AnyNpcImportance> = T extends MinorImportance ? 0 | 1
+export type Balance<T extends AnyNpcImportance> = T extends MinorImportance ? 0 | 1
 	: T extends ModerateImportance ? 0 | 1 | 2
 	: 0 | 1 | 2 | 3;
 
@@ -34,4 +33,10 @@ export interface NonPlayerCharacter<T extends AnyNpcImportance = AnyNpcImportanc
 	fatigue: Fatigue<T>;
 	/** The position of the NPCs balance in the direction of their principle */
 	balance: Balance<T>;
+}
+
+export type PlaybookName = `The ${string}`;
+
+export interface PlayerCharacter {
+	playbook: PlaybookName
 }

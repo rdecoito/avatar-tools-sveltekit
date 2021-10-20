@@ -1,5 +1,7 @@
 import type {
-	AnyNpcImportance,
+	Balance,
+	Conditions,
+	Fatigue,
 	MajorImportance,
 	MinorImportance,
 	ModerateImportance
@@ -22,18 +24,18 @@ export const NpcImportance = Object.freeze({
 
 export const NpcMaxStats = Object.freeze({
 	['Minor' as MinorImportance]: Object.freeze({
-		fatigue: 3,
-		conditions: 1,
-		balance: 1
+		fatigue: 3 as Fatigue<MinorImportance>,
+		conditions: 1 as Conditions<MinorImportance>['length'],
+		balance: 1 as Balance<MinorImportance>
 	}),
 	['Moderate' as ModerateImportance]: Object.freeze({
-		fatigue: 5,
-		conditions: 3,
-		balance: 2
+		fatigue: 5 as Fatigue<ModerateImportance>,
+		conditions: 3 as Conditions<ModerateImportance>['length'],
+		balance: 2 as Balance<ModerateImportance>
 	}),
 	['Major' as MajorImportance]: Object.freeze({
-		fatigue: 10,
-		conditions: 5,
-		balance: 3
+		fatigue: 10 as Fatigue<MajorImportance>,
+		conditions: 5 as Conditions<MajorImportance>['length'],
+		balance: 3 as Balance<MajorImportance>
 	})
 });
