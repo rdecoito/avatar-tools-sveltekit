@@ -1,14 +1,14 @@
 <script lang="ts">
-	import type { NonPlayerCharacter } from 'src/global';
-	import { NpcImportance } from '../globals';
+	import type { PlayerCharacter, NonPlayerCharacter } from 'src/global';
+	import { NpcImportance } from 'src/global';
 	import NpcManager from 'src/Components/NpcManager.svelte';
 	import PcManager from 'src/Components/Pc.svelte';
 
-	let pcs: PlayerCharacter[] = [
+	let pcs: Array<PlayerCharacter> = [
 		
 	];
 
-	let npcs: NonPlayerCharacter[] = [
+	let npcs: Array<NonPlayerCharacter> = [
 		{
 			name: 'Geoff',
 			importance: NpcImportance.MODERATE,

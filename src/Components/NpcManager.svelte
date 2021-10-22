@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { NonPlayerCharacter } from 'src/global';
+	import { NpcImportance } from 'src/global';
 	import Npc from '../Components/Npc.svelte';
 	import Card from '../Components/Card.svelte';
-	import { NpcImportance } from '../globals';
 
 	export let npcs: Array<NonPlayerCharacter> = [];
 

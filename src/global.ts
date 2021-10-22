@@ -99,8 +99,11 @@ export interface PlayerCharacter {
 	trainings: Array<string>;
 	fightingStyle: string;
 	stats: PlayerStats;
-	conditions: Array<Condition>;
 	moves: Array<string>;
 	techniques: Array<FightingTechnique>;
 	growth: number;
+	fatigue: 0 | 1 | 2 | 3 | 5;
+	conditions: Array<Condition>;
+	principles: [string, string];
+	balance: 3 | 2 | 1 | 0 | -1 | -2 | -3;
 }
