@@ -35,6 +35,6 @@
 	{/each}
 </div>
 
-<style lang="scss">
+<!-- <style lang="scss">
 	
-</style>
+</style> -->

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { NonPlayerCharacter } from 'src/global';
-	import { NpcImportance } from 'src/global';
+	import type { NonPlayerCharacter } from '../global';
+	import { NpcImportance } from '../global';
 	import Npc from '../Components/Npc.svelte';
 	import Card from '../Components/Card.svelte';
 
@@ -36,20 +36,22 @@
 	}
 </script>
 
-<button on:click={handleNewNpc} class="new-npc-btn">+ New NPC</button>
+<div>
+	<button on:click={handleNewNpc} class="new-npc-btn">+ New NPC</button>
 
-<div class="npcs-block">
-	{#each npcs as npc, index (npc)}
-	<div class="Card-container">
-		<Card>
-			<div class="button-row">
-				<button on:click={() => handleEraseNpc(index)}>X</button>
-				<button on:click={() => handleResetNpc(index)}>{'<-'}</button>
-			</div>
-			<Npc npc={npc} />
-		</Card>
+	<div class="npcs-block">
+		{#each npcs as npc, index (npc)}
+		<div class="Card-container">
+			<Card>
+				<div class="button-row">
+					<button on:click={() => handleEraseNpc(index)}>X</button>
+					<button on:click={() => handleResetNpc(index)}>{'<-'}</button>
+				</div>
+				<Npc npc={npc} />
+			</Card>
+		</div>
+		{/each}
 	</div>
-	{/each}
 </div>
 
 <style lang="scss">

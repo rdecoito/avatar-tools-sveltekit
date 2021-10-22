@@ -4,6 +4,15 @@
 /* ========= CONSTANTS ========= */
 /* ========= ========= ========= */
 
+export enum Playbook {
+	BOLD = 'The Bold',
+	GUARDIAN = 'The Guardian',
+	HAMMER = 'The Hammer',
+	ICON = 'The Icon',
+	IDEALIST = 'The Idealist',
+	SUCCESSOR = 'The Successor'
+};
+
 export enum MasteryLevel {
 	LEARNED = 'Learned',
 	PRACTICED = 'Practiced',
@@ -15,6 +24,15 @@ export enum Approach {
 	AA = 'A&A',
 	EO = 'E&O'
 };
+
+export enum Training {
+	WATERBENDING = 'Waterbending',
+	FIREBENDING = 'Firebending',
+	EARTHBENDING = 'Earthbending',
+	AIRBENDING = 'Airbending',
+	WEAPONS = 'Weapons',
+	TECHNOLOGY = 'Technology'
+}
 
 export enum NpcImportance {
 	/**

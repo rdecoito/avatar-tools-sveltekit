@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Fatigue, MajorImportance, NonPlayerCharacter } from '../global';
-	import { NpcImportance, NpcMaxStats } from '../globals';
+	import { NpcImportance, NpcMaxStats } from '../global';
 	import FakeCheckbox from './FakeCheckbox.svelte';
 
 	export let npc: NonPlayerCharacter;

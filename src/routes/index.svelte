@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { PlayerCharacter, NonPlayerCharacter } from 'src/global';
-	import { NpcImportance } from 'src/global';
-	import NpcManager from 'src/Components/NpcManager.svelte';
-	import PcManager from 'src/Components/Pc.svelte';
+	import type { PlayerCharacter, NonPlayerCharacter } from '../global';
+	import { NpcImportance } from '../global';
+	import NpcManager from '../Components/NpcManager.svelte';
+	import PcManager from '../Components/Pc.svelte';
 
 	let pcs: Array<PlayerCharacter> = [
 		
@@ -21,9 +21,22 @@
 	];
 </script>
 
-<PcManager {pcs} />
-<NpcManager {npcs} />
+<div class="top">
+	<div>
+		<PcManager {pcs} />
+	</div>
+	<div>
+		<NpcManager {npcs} />
+	</div>
+</div>
 
 <style lang="scss">
-	
+	div.top {
+		display: flex;
+		flex-flow: row nowrap;
+
+		:not(:last-child) {
+			margin-right: 10px;
+		}
+	}
 </style>
