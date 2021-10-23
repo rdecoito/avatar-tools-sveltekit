@@ -1,5 +1,3 @@
-/// <reference types="@sveltejs/kit" />
-
 /* ========= ========= ========= */
 /* ========= CONSTANTS ========= */
 /* ========= ========= ========= */
@@ -113,15 +111,16 @@ export interface PlayerStats {
 }
 
 export interface PlayerCharacter {
+	name: string;
 	playbook: string;
-	trainings: Array<string>;
+	training: string;
 	fightingStyle: string;
 	stats: PlayerStats;
 	moves: Array<string>;
 	techniques: Array<FightingTechnique>;
 	growth: number;
-	fatigue: 0 | 1 | 2 | 3 | 5;
+	fatigue: number;
 	conditions: Array<Condition>;
 	principles: [string, string];
-	balance: 3 | 2 | 1 | 0 | -1 | -2 | -3;
+	balance: number;
 }

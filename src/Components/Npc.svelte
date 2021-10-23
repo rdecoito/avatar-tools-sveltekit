@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { Fatigue, MajorImportance, NonPlayerCharacter } from '../global';
-	import { NpcImportance, NpcMaxStats } from '../global';
+	import type { Fatigue, NonPlayerCharacter } from '../globals';
+	import { NpcImportance, NpcMaxStats } from '../globals';
 	import FakeCheckbox from './FakeCheckbox.svelte';
 
 	export let npc: NonPlayerCharacter;
@@ -9,10 +9,10 @@
 		console.log('INDEX', index)
 		if (npc.fatigue === index) {
 			// user clicked the highest marked box
-			npc.fatigue = 0 as Fatigue<MajorImportance>;
+			npc.fatigue = 0 as Fatigue<NpcImportance>;
 		} else {
 			// user clicked a box other than the highest marked box
-			npc.fatigue = index as Fatigue<MajorImportance>;
+			npc.fatigue = index as Fatigue<NpcImportance>;
 		}
 		console.log(npc.fatigue);
 		npc = npc;
@@ -122,7 +122,7 @@
 					<input type="text" class="medium" bind:value={condition[0]}>
 				</div>
 				{/if}
-		{/each}
+			{/each}
 		</div>
 
 		<div class="balance-track">

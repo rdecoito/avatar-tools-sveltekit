@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { NonPlayerCharacter } from '../global';
-	import { NpcImportance } from '../global';
+	import type { NonPlayerCharacter } from '../globals';
+	import { NpcImportance } from '../globals';
 	import Npc from '../Components/Npc.svelte';
 	import Card from '../Components/Card.svelte';
 
