@@ -68,10 +68,10 @@
 <hr />
 
 <div class="top">
-	<div>
+	<div class="pcs">
 		<PcManager {pcs} />
 	</div>
-	<div>
+	<div class="npcs">
 		<NpcManager {npcs} />
 	</div>
 </div>
@@ -81,8 +81,21 @@
 		display: flex;
 		flex-flow: row nowrap;
 
+		width: 100%;
+		background-color: #333;
+
 		:not(:last-child) {
 			margin-right: 10px;
+		}
+
+		>div {
+			display: flex;
+			flex-flow: column wrap;
+
+			height: 100%;
+			width: 50%;
+			overflow: hidden;
+			padding: 5px;
 		}
 	}
 </style>

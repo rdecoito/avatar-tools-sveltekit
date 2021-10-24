@@ -63,9 +63,9 @@
 			{/each}
 		</select>
 
-		<input class="medium" type="text" bind:value={pc.name} />
+		<input class="medium" type="text" bind:value={pc.name} placeholder="Name" />
 
-		<select class="medium" bind:value={pc.training}>
+		<select class="medium" bind:value={pc.training} >
 			{#each Object.values(Training) as training}
 				<option value={training}>
 					{training}
@@ -73,7 +73,7 @@
 			{/each}
 		</select>
 
-		<input class="medium" type="text" bind:value={pc.fightingStyle} />
+		<input class="medium" type="text" bind:value={pc.fightingStyle} placeholder="Fighting Style" />
 	</div>
 
 	<hr aria-hidden="true" />
@@ -115,19 +115,19 @@
 		<div class="stat-row">
 			<div class="condition-track">
 				Conditions
-				{#each pc.conditions as condition (condition)}
+				{#each pc.conditions as condition, index (condition)}
 					<div>
 						<input type="checkbox" bind:checked={condition[1]} />
-						<input type="text" class="medium" bind:value={condition[0]} />
+						<input type="text" class="medium" bind:value={condition[0]} placeholder={`Conditon ${index}`}  />
 					</div>
 				{/each}
 			</div>
 
 			<div class="balance-track">
 				Balance
-				<input class="medium" type="text" bind:value={pc.principles[1]} />
+				<input class="medium" type="text" bind:value={pc.principles[1]} placeholder="Principle 1 (+)" />
 				<input class="small" type="number" bind:value={pc.balance} />
-				<input class="medium" type="text" bind:value={pc.principles[0]} />
+				<input class="medium" type="text" bind:value={pc.principles[0]} placeholder="Principle 2 (-)" />
 			</div>
 		</div>
 	</div>
@@ -180,6 +180,11 @@
 		.info-block {
 			display: flex;
 			flex-flow: column nowrap;
+			align-items: center;
+
+			input, select {
+				text-align: center;
+			}
 		}
 
 		.fatigue-track {

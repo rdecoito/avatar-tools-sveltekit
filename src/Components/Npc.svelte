@@ -84,7 +84,7 @@
 			&nbsp;NPC<br />
 		</div>
 
-		<input type="text" bind:value={npc.name} />
+		<input type="text" bind:value={npc.name} placeholder="Name" />
 
 		<!--
 			`aria-hidden` because this is purely a visual break.
@@ -94,7 +94,7 @@
 
 		<div>
 			<label for="drive"> Drive </label>
-			<input type="text" bind:value={npc.drive} />
+			<input type="text" bind:value={npc.drive} placeholder="Drive" />
 		</div>
 	</div>
 
@@ -119,7 +119,7 @@
 				{#if index < NpcMaxStats[npc.importance].conditions}
 					<div>
 						<input type="checkbox" bind:checked={condition[1]} />
-						<input type="text" class="medium" bind:value={condition[0]} />
+						<input type="text" class="medium" bind:value={condition[0]} placeholder={`Condition ${index}`} />
 					</div>
 				{/if}
 			{/each}
@@ -128,7 +128,7 @@
 		<div class="balance-track">
 			Balance
 			<div>
-				<input class="medium" type="text" bind:value={npc.principle} />
+				<input class="medium" type="text" bind:value={npc.principle} placeholder="Principle" />
 				<input class="small" type="number" bind:value={npc.balance} />
 			</div>
 		</div>
