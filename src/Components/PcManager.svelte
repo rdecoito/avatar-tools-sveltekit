@@ -31,7 +31,7 @@
 </script>
 
 <div>
-	<button on:click={handleNewPc} class="new-npc-btn">+ New NPC</button>
+	<button on:click={handleNewPc} class="new-npc-btn">+ New PC</button>
 
 	<div class="pcs-block" class:row>
 		{#if Array.isArray(pcs)}
