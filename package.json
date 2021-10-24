@@ -11,9 +11,6 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
 	},
-	"dependencies": {
-		"node-sass": "^6.0.1"
-	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^1.0.0-next.34",
 		"@sveltejs/kit": "next",
@@ -31,5 +28,9 @@
 		"svelte-preprocess": "^4.9.8",
 		"tslib": "^2.3.1",
 		"typescript": "^4.4.4"
+	},
+	"dependencies": {
+		"sass": "^1.43.3",
+		"sass-loader": "^12.2.0"
 	}
 }
