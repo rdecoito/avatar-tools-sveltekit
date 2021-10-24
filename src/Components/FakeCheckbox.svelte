@@ -1,20 +1,16 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from 'svelte';
 
 	export let checked: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
-	function forward(event) {
-		dispatch('click', event.detail)
+	function forward(event: UIEvent) {
+		dispatch('click', event.detail);
 	}
 </script>
 
-<div
-	class="fake-checkbox"
-	class:checked
-	on:click={forward}
-></div>
+<div class="fake-checkbox" class:checked on:click={forward} />
 
 <style lang="scss">
 	.fake-checkbox {

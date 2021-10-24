@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PlayerCharacter } from '../globals';
-	import { Playbook, Training } from '../globals';
+	import { Playbook, Training, PcMaxStats } from '../globals';
 	import FakeCheckbox from './FakeCheckbox.svelte';
 
 	export let pc: PlayerCharacter;
@@ -11,13 +11,44 @@
 		} else {
 			pc.fatigue = newFatigue;
 		}
-	}
+	};
 
 	const handleGrowthClick = (newGrowth: number) => {
 		if (newGrowth === pc.growth) {
 			pc.growth = 0;
 		} else {
 			pc.growth = newGrowth;
+		}
+	};
+
+	$: if (
+		typeof pc.stats === 'object' &&
+		typeof pc.growth === 'number' &&
+		typeof pc.balance === 'number' &&
+		Array.isArray(pc.conditions)
+	) {
+		['creativity', 'focus', 'harmony', 'passion'].forEach((stat) => {
+			if (pc.stats[stat] > PcMaxStats.stats) {
+				pc.stats[stat] = PcMaxStats.stats;
+			} else if (pc.stats[stat] < -PcMaxStats.stats) {
+				pc.stats[stat] = -PcMaxStats.stats;
+			}
+		});
+
+		if (pc.growth > PcMaxStats.growth) {
+			pc.growth = PcMaxStats.growth;
+		} else if (pc.growth < 0) {
+			pc.growth = 0;
+		}
+
+		if (pc.balance > PcMaxStats.balance) {
+			pc.balance = PcMaxStats.balance;
+		} else if (pc.balance < -PcMaxStats.balance) {
+			pc.balance = -PcMaxStats.balance;
+		}
+
+		if (pc.conditions.length > PcMaxStats.conditions) {
+			pc.conditions.length = PcMaxStats.conditions;
 		}
 	}
 </script>
@@ -32,7 +63,7 @@
 			{/each}
 		</select>
 
-		<input class="medium" type="text" bind:value={pc.name}>
+		<input class="medium" type="text" bind:value={pc.name} />
 
 		<select class="medium" bind:value={pc.training}>
 			{#each Object.values(Training) as training}
@@ -42,29 +73,31 @@
 			{/each}
 		</select>
 
-		<input class="medium" type="text" bind:value={pc.fightingStyle}>
+		<input class="medium" type="text" bind:value={pc.fightingStyle} />
 	</div>
+
+	<hr aria-hidden="true" />
 
 	<div class="stat-reference">
 		<div class="left">
 			<div>
 				Creativity&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.creativity}>
+				<input class="small" type="number" bind:value={pc.stats.creativity} />
 			</div>
 			<div>
 				Focus&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.focus}>
+				<input class="small" type="number" bind:value={pc.stats.focus} />
 			</div>
 		</div>
 
 		<div class="right">
 			<div>
 				Harmony&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.harmony}>
+				<input class="small" type="number" bind:value={pc.stats.harmony} />
 			</div>
 			<div>
 				Passion&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.passion}>
+				<input class="small" type="number" bind:value={pc.stats.passion} />
 			</div>
 		</div>
 	</div>
@@ -84,17 +117,17 @@
 				Conditions
 				{#each pc.conditions as condition (condition)}
 					<div>
-						<input type="checkbox" bind:checked={condition[1]}>
-						<input type="text" class="medium" bind:value={condition[0]}>
+						<input type="checkbox" bind:checked={condition[1]} />
+						<input type="text" class="medium" bind:value={condition[0]} />
 					</div>
 				{/each}
 			</div>
 
 			<div class="balance-track">
 				Balance
-				<input class="medium" type="text" bind:value={pc.principles[1]}>
-				<input class="small" type="number" bind:value={pc.balance}>
-				<input class="medium" type="text" bind:value={pc.principles[0]}>
+				<input class="medium" type="text" bind:value={pc.principles[1]} />
+				<input class="small" type="number" bind:value={pc.balance} />
+				<input class="medium" type="text" bind:value={pc.principles[0]} />
 			</div>
 		</div>
 	</div>
@@ -110,16 +143,26 @@
 </div>
 
 <style lang="scss">
-	input, select {
+	input,
+	select {
 		font-family: inherit;
 	}
-	
+
 	input.small {
 		width: 40px;
 	}
-	
+
 	input.medium {
 		width: 100px;
+	}
+
+	hr {
+		align-self: center;
+		border: 0;
+		height: 1px;
+		width: 80%;
+		background: #333;
+		background-image: linear-gradient(to right, #ccc, #333, #ccc);
 	}
 
 	.pc-container {
@@ -130,8 +173,8 @@
 		max-width: 300px;
 		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
-		:not(:last-child) {
-			margin-bottom: 2px;
+		> :not(hr):not(:last-child) {
+			margin-bottom: 5px;
 		}
 
 		.info-block {
@@ -142,8 +185,8 @@
 		.fatigue-track {
 			display: flex;
 			flex-flow: row nowrap;
-			
-			>div {
+
+			> div {
 				margin-left: 2px;
 			}
 		}

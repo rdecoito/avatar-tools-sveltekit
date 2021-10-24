@@ -1,47 +1,71 @@
 <script lang="ts">
-	import { PlayerCharacter, NonPlayerCharacter, Training } from '../globals';
-	import { NpcImportance, Playbook } from '../globals';
+	import type { PlayerCharacter, NonPlayerCharacter } from '../globals';
 	import NpcManager from '../Components/NpcManager.svelte';
 	import PcManager from '../Components/PcManager.svelte';
+	import { APP_STATE_VERSION } from '../costants';
 
-	let pcs: Array<PlayerCharacter> = [
-		{
-			name: 'Sue',
-			playbook: Playbook.BOLD,
-			training: Training.FIREBENDING,
-			fightingStyle: 'Fire Fists',
-			stats: {
-				creativity: 2,
-				focus: 1,
-				harmony: 0,
-				passion: -1
-			},
-			moves: [],
-			techniques: [],
-			growth: 0,
-			fatigue: 3,
-			conditions: [
-				['Afraid', false],
-				['Angry', false],
-				['Foolish', false],
+	let pcs: Array<PlayerCharacter>;
+	let npcs: Array<NonPlayerCharacter>;
+	let downloadFileName: string;
+
+	let fileInput: HTMLInputElement;
+	let downloadLink: HTMLAnchorElement;
+
+	let fileData: FileList;
+
+	$: if (fileData?.length) {
+		let file = fileData[0];
+		downloadFileName = file.name;
+		file
+			.text()
+			.then((text) => {
+				let parsed = JSON.parse(text);
+				if (Array.isArray(parsed.pcs)) {
+					pcs = parsed.pcs;
+				}
+				if (Array.isArray(parsed.npcs)) {
+					npcs = parsed.npcs;
+				}
+			})
+			.catch((e) => {
+				if (e instanceof SyntaxError) {
+				}
+			})
+			.finally(() => {
+				fileData = null;
+			});
+	}
+
+	const handleImportClick = () => {
+		if (fileInput) fileInput.click();
+	};
+
+	const handleSaveClick = async () => {
+		if (!downloadLink) return;
+		const stateBlob = new Blob(
+			[
+				JSON.stringify({
+					version: APP_STATE_VERSION,
+					pcs,
+					npcs
+				})
 			],
-			principles: ['Freedom', 'Role'],
-			balance: 1
-		}
-	];
-
-	let npcs: Array<NonPlayerCharacter> = [
-		{
-			name: 'Geoff',
-			importance: NpcImportance.MODERATE,
-			conditions: [['Angry', false], ['Afraid', false], ['Foolish', false]],
-			drive: 'To defeat his foes',
-			principle: 'Serendipity',
-			fatigue: 3,
-			balance: 0
-		}
-	];
+			{ type: 'text/plain ' }
+		);
+		downloadLink.href = URL.createObjectURL(stateBlob);
+		downloadLink.download = downloadFileName ?? 'avatar-tools-data.json';
+		downloadLink.click();
+	};
 </script>
+
+<input type="file" bind:this={fileInput} bind:files={fileData} style="display: none;" />
+<button on:click={handleImportClick}>Import Data</button>
+
+<a bind:this={downloadLink} href="placeholder" download="placeholder" style="display: none;"
+	>This download link is invisible</a
+>
+<button on:click={handleSaveClick}>Save Data</button>
+<hr />
 
 <div class="top">
 	<div>

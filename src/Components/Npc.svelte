@@ -6,7 +6,6 @@
 	export let npc: NonPlayerCharacter;
 
 	const handleFatigueClick = (index: number) => {
-		console.log('INDEX', index)
 		if (npc.fatigue === index) {
 			// user clicked the highest marked box
 			npc.fatigue = 0 as Fatigue<NpcImportance>;
@@ -14,9 +13,9 @@
 			// user clicked a box other than the highest marked box
 			npc.fatigue = index as Fatigue<NpcImportance>;
 		}
-		console.log(npc.fatigue);
+
 		npc = npc;
-	}
+	};
 
 	// Importance Validation
 	$: if (npc.importance) {
@@ -82,22 +81,20 @@
 					</option>
 				{/each}
 			</select>
-			&nbsp;NPC<br>
+			&nbsp;NPC<br />
 		</div>
 
-		<input type="text" bind:value={npc.name}>
+		<input type="text" bind:value={npc.name} />
 
 		<!--
 			`aria-hidden` because this is purely a visual break.
 			We don't want screenreaders seeing this.
 		-->
-		<hr aria-hidden="true">
+		<hr aria-hidden="true" />
 
 		<div>
-			<label for="drive">
-				Drive
-			</label>
-			<input type="text" bind:value={npc.drive}>
+			<label for="drive"> Drive </label>
+			<input type="text" bind:value={npc.drive} />
 		</div>
 	</div>
 
@@ -106,7 +103,10 @@
 		<div class="fatigue-checkboxes">
 			{#each [...Array(NpcMaxStats[npc.importance].fatigue).keys()] as index (index)}
 				<div>
-					<FakeCheckbox on:click={() => handleFatigueClick(index + 1)} checked={index < npc.fatigue} />
+					<FakeCheckbox
+						on:click={() => handleFatigueClick(index + 1)}
+						checked={index < npc.fatigue}
+					/>
 				</div>
 			{/each}
 		</div>
@@ -117,10 +117,10 @@
 			Conditions
 			{#each npc.conditions as condition, index (condition)}
 				{#if index < NpcMaxStats[npc.importance].conditions}
-				<div>
-					<input type="checkbox" bind:checked={condition[1]}>
-					<input type="text" class="medium" bind:value={condition[0]}>
-				</div>
+					<div>
+						<input type="checkbox" bind:checked={condition[1]} />
+						<input type="text" class="medium" bind:value={condition[0]} />
+					</div>
 				{/if}
 			{/each}
 		</div>
@@ -128,8 +128,8 @@
 		<div class="balance-track">
 			Balance
 			<div>
-				<input class="medium" type="text" bind:value={npc.principle}>
-				<input class="small" type="number" bind:value={npc.balance}>
+				<input class="medium" type="text" bind:value={npc.principle} />
+				<input class="small" type="number" bind:value={npc.balance} />
 			</div>
 		</div>
 	</div>
@@ -143,7 +143,7 @@
 	input.small {
 		width: 40px;
 	}
-	
+
 	input.medium {
 		width: 100px;
 	}
@@ -164,18 +164,18 @@
 		max-width: 300px;
 		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
-		>:not(:last-child) {
+		> :not(:last-child) {
 			margin-bottom: 5px;
 		}
 
 		.info-block {
 			text-align: center;
 
-			>:not(:last-child) >:not(hr) {
+			> :not(:last-child) > :not(hr) {
 				margin-bottom: 2px;
 			}
 
-			>input {
+			> input {
 				font-family: inherit;
 				text-align: center;
 			}
@@ -190,7 +190,7 @@
 				display: flex;
 				flex-flow: row wrap;
 
-				>div {
+				> div {
 					margin-left: 2px;
 				}
 			}
@@ -200,7 +200,7 @@
 			display: flex;
 			flex-flow: row wrap;
 
-			>:not(:last-child) {
+			> :not(:last-child) {
 				margin-right: 4px;
 			}
 
@@ -216,5 +216,5 @@
 				align-items: center;
 			}
 		}
-	}	
+	}
 </style>

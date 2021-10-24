@@ -1,6 +1,9 @@
-import type { NonPlayerCharacter, PlayerCharacter } from "../global";
+import type { NonPlayerCharacter, PlayerCharacter } from '../globals';
 
-export const validateNpc = (npc: NonPlayerCharacter): boolean  => true;
+export const validateNpc = (npc: NonPlayerCharacter): boolean => {
+	npc as NonPlayerCharacter;
+	return true;
+};
 
 export const createNewPc = (): PlayerCharacter => ({
 	name: '',

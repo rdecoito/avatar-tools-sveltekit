@@ -2,6 +2,14 @@
 /* ========= CONSTANTS ========= */
 /* ========= ========= ========= */
 
+export enum PcMaxStats {
+	stats = 3,
+	balance = 3,
+	fatigue = 5,
+	conditions = 5,
+	growth = 4
+}
+
 export enum Playbook {
 	BOLD = 'The Bold',
 	GUARDIAN = 'The Guardian',
@@ -9,19 +17,19 @@ export enum Playbook {
 	ICON = 'The Icon',
 	IDEALIST = 'The Idealist',
 	SUCCESSOR = 'The Successor'
-};
+}
 
 export enum MasteryLevel {
 	LEARNED = 'Learned',
 	PRACTICED = 'Practiced',
 	MASTERED = 'Mastered'
-};
+}
 
 export enum Approach {
 	DM = 'D&M',
 	AA = 'A&A',
 	EO = 'E&O'
-};
+}
 
 export enum Training {
 	WATERBENDING = 'Waterbending',
@@ -45,7 +53,7 @@ export enum NpcImportance {
 	 * An NPC who may be a significant recurring character and may be the focus of an adventure
 	 */
 	MAJOR = 'Major'
-};
+}
 
 export const NpcMaxStats = Object.freeze({
 	[NpcImportance.MINOR]: Object.freeze({
@@ -69,15 +77,19 @@ export const NpcMaxStats = Object.freeze({
 /* ========= TYPES ========= */
 /* ========= ===== ========= */
 
-export type Fatigue<T extends NpcImportance> = T extends NpcImportance.MINOR ? 0 | 1
-	: T extends NpcImportance.MODERATE ? 0 | 1 | 2 | 3 | 4 | 5
+export type Fatigue<T extends NpcImportance> = T extends NpcImportance.MINOR
+	? 0 | 1
+	: T extends NpcImportance.MODERATE
+	? 0 | 1 | 2 | 3 | 4 | 5
 	: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export type Condition = [string, boolean];
 export type Conditions = Array<Condition>;
 
-export type Balance<T extends NpcImportance> = T extends NpcImportance.MINOR ? 0 | 1
-	: T extends NpcImportance.MODERATE ? 0 | 1 | 2
+export type Balance<T extends NpcImportance> = T extends NpcImportance.MINOR
+	? 0 | 1
+	: T extends NpcImportance.MODERATE
+	? 0 | 1 | 2
 	: 0 | 1 | 2 | 3;
 
 export interface NonPlayerCharacter<T extends NpcImportance = NpcImportance> {

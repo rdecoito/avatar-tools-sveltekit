@@ -18,22 +18,22 @@
 		});
 
 		npcs = npcs;
-	}
+	};
 
 	const handleResetNpc = (index: number) => {
 		const npc = npcs[index];
 		npc.fatigue = 0;
 		npc.balance = 0;
-		npc.conditions.forEach((condition) => condition[1] = false);
+		npc.conditions.forEach((condition) => (condition[1] = false));
 
 		npcs = npcs;
-	}
+	};
 
 	const handleEraseNpc = (index: number) => {
 		npcs.splice(index, 1);
 
 		npcs = npcs;
-	}
+	};
 </script>
 
 <div>
@@ -41,15 +41,15 @@
 
 	<div class="npcs-block">
 		{#each npcs as npc, index (npc)}
-		<div class="Card-container">
-			<Card>
-				<div class="button-row">
-					<button on:click={() => handleEraseNpc(index)}>X</button>
-					<button on:click={() => handleResetNpc(index)}>{'<-'}</button>
-				</div>
-				<Npc npc={npc} />
-			</Card>
-		</div>
+			<div class="Card-container">
+				<Card>
+					<div class="button-row">
+						<button on:click={() => handleEraseNpc(index)}>X</button>
+						<button on:click={() => handleResetNpc(index)}>{'<-'}</button>
+					</div>
+					<Npc {npc} />
+				</Card>
+			</div>
 		{/each}
 	</div>
 </div>
