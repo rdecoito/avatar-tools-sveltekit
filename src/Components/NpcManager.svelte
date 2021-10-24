@@ -4,7 +4,8 @@
 	import Npc from '../Components/Npc.svelte';
 	import Card from '../Components/Card.svelte';
 
-	export let npcs: Array<NonPlayerCharacter> = [];
+	export let npcs: Array<NonPlayerCharacter>;
+	export let row: boolean = true;
 
 	const handleNewNpc = () => {
 		npcs.push({
@@ -39,7 +40,7 @@
 <div>
 	<button on:click={handleNewNpc} class="new-npc-btn">+ New NPC</button>
 
-	<div class="npcs-block">
+	<div class="npcs-block" class:row>
 		{#each npcs as npc, index (npc)}
 			<div class="Card-container">
 				<Card>
@@ -55,22 +56,20 @@
 </div>
 
 <style lang="scss">
-	button.new-npc-btn {
-		margin-bottom: 5px;
-	}
-
 	.npcs-block {
 		display: flex;
 		flex-flow: column;
 		align-items: flex-start;
 
+		&.row {
+			flex-flow: row wrap;
+		}
+
 		.Card-container {
+			margin: 7px;
+
 			.button-row {
 				position: absolute;
-			}
-
-			&:not(:last-child) {
-				margin-bottom: 7px;
 			}
 		}
 	}

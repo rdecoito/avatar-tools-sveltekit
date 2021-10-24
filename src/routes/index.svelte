@@ -4,8 +4,8 @@
 	import PcManager from '../Components/PcManager.svelte';
 	import { APP_STATE_VERSION } from '../costants';
 
-	let pcs: Array<PlayerCharacter>;
-	let npcs: Array<NonPlayerCharacter>;
+	let pcs: Array<PlayerCharacter> = [];
+	let npcs: Array<NonPlayerCharacter> = [];
 	let downloadFileName: string;
 
 	let fileInput: HTMLInputElement;
@@ -68,18 +68,18 @@
 <hr />
 
 <div class="top">
-	<div class="pcs">
-		<PcManager {pcs} />
+	<div>
+		<PcManager {pcs} row={true} />
 	</div>
-	<div class="npcs">
-		<NpcManager {npcs} />
+	<div>
+		<NpcManager {npcs} row={true} />
 	</div>
 </div>
 
 <style lang="scss">
 	div.top {
 		display: flex;
-		flex-flow: row nowrap;
+		flex-flow: row wrap;
 
 		width: 100%;
 		background-color: #333;
@@ -88,12 +88,12 @@
 			margin-right: 10px;
 		}
 
-		>div {
+		> div {
 			display: flex;
-			flex-flow: column wrap;
+			flex-flow: row wrap;
 
-			height: 100%;
-			width: 50%;
+			width: 48%;
+			max-width: 48%;
 			overflow: hidden;
 			padding: 5px;
 		}

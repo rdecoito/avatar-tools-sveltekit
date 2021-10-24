@@ -119,7 +119,12 @@
 				{#if index < NpcMaxStats[npc.importance].conditions}
 					<div>
 						<input type="checkbox" bind:checked={condition[1]} />
-						<input type="text" class="medium" bind:value={condition[0]} placeholder={`Condition ${index}`} />
+						<input
+							type="text"
+							class="medium"
+							bind:value={condition[0]}
+							placeholder={`Condition ${index}`}
+						/>
 					</div>
 				{/if}
 			{/each}

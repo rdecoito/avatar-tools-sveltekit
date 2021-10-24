@@ -5,7 +5,8 @@
 	import Card from './Card.svelte';
 	import Pc from './Pc.svelte';
 
-	export let pcs: Array<PlayerCharacter> = [];
+	export let pcs: Array<PlayerCharacter>;
+	export let row: boolean = false;
 
 	const handleNewPc = () => {
 		pcs.push(createNewPc());
@@ -32,38 +33,38 @@
 <div>
 	<button on:click={handleNewPc} class="new-npc-btn">+ New NPC</button>
 
-	<div class="pcs-block">
-		{#each pcs as pc, index (pc)}
-			<div class="Card-container">
-				<Card>
-					<div class="button-row">
-						<button on:click={() => handleErasePc(index)}>X</button>
-						<button on:click={() => handleResetPc(index)}>{'<-'}</button>
-					</div>
-					<Pc {pc} />
-				</Card>
-			</div>
-		{/each}
+	<div class="pcs-block" class:row>
+		{#if Array.isArray(pcs)}
+			{#each pcs as pc, index (pc)}
+				<div class="Card-container">
+					<Card>
+						<div class="button-row">
+							<button on:click={() => handleErasePc(index)}>X</button>
+							<button on:click={() => handleResetPc(index)}>{'<-'}</button>
+						</div>
+						<Pc {pc} />
+					</Card>
+				</div>
+			{/each}
+		{/if}
 	</div>
 </div>
 
 <style lang="scss">
-	button.new-npc-btn {
-		margin-bottom: 5px;
-	}
-
 	.pcs-block {
 		display: flex;
 		flex-flow: column;
 		align-items: flex-start;
 
+		&.row {
+			flex-flow: row wrap;
+		}
+
 		.Card-container {
+			margin: 7px;
+
 			.button-row {
 				position: absolute;
-			}
-
-			&:not(:last-child) {
-				margin-bottom: 7px;
 			}
 		}
 	}
