@@ -1,11 +1,9 @@
 <script lang="ts">
-	import type { PlayerCharacter, NonPlayerCharacter } from '../globals';
+	import { pcStore, npcStore } from '../stores/data';
+	import { APP_STATE_VERSION } from '../constants/metadata';
 	import NpcManager from '../Components/NpcManager.svelte';
 	import PcManager from '../Components/PcManager.svelte';
-	import { APP_STATE_VERSION } from '../costants';
 
-	let pcs: Array<PlayerCharacter> = [];
-	let npcs: Array<NonPlayerCharacter> = [];
 	let downloadFileName: string;
 
 	let fileInput: HTMLInputElement;
@@ -16,19 +14,22 @@
 	$: if (fileData?.length) {
 		let file = fileData[0];
 		downloadFileName = file.name;
-		file
-			.text()
+
+		file.text()
 			.then((text) => {
 				let parsed = JSON.parse(text);
 				if (Array.isArray(parsed.pcs)) {
-					pcs = parsed.pcs;
+					$pcStore = parsed.pcs;
 				}
 				if (Array.isArray(parsed.npcs)) {
-					npcs = parsed.npcs;
+					$npcStore = parsed.npcs;
 				}
 			})
 			.catch((e) => {
 				if (e instanceof SyntaxError) {
+					// TODO: toast the user that an error occurred
+				} else {
+					throw e;
 				}
 			})
 			.finally(() => {
@@ -46,11 +47,11 @@
 			[
 				JSON.stringify({
 					version: APP_STATE_VERSION,
-					pcs,
-					npcs
-				})
+					pcs: $pcStore,
+					npcs: $npcStore,
+				}),
 			],
-			{ type: 'text/plain ' }
+			{ type: 'text/plain' }
 		);
 		downloadLink.href = URL.createObjectURL(stateBlob);
 		downloadLink.download = downloadFileName ?? 'avatar-tools-data.json';
@@ -58,21 +59,29 @@
 	};
 </script>
 
-<input type="file" bind:this={fileInput} bind:files={fileData} style="display: none;" />
+<input
+	type="file"
+	bind:this={fileInput}
+	bind:files={fileData}
+	style="display: none;"
+/>
 <button on:click={handleImportClick}>Import Data</button>
 
-<a bind:this={downloadLink} href="placeholder" download="placeholder" style="display: none;"
-	>This download link is invisible</a
+<a
+	bind:this={downloadLink}
+	href="placeholder"
+	download="placeholder"
+	style="display: none;">This download link is invisible</a
 >
 <button on:click={handleSaveClick}>Save Data</button>
 <hr />
 
 <div class="top">
 	<div>
-		<PcManager {pcs} row={true} />
+		<PcManager pcs={$pcStore} row={true} />
 	</div>
 	<div>
-		<NpcManager {npcs} row={true} />
+		<NpcManager npcs={$npcStore} row={true} />
 	</div>
 </div>
 
@@ -82,7 +91,6 @@
 		flex-flow: row wrap;
 
 		width: 100%;
-		background-color: #333;
 
 		:not(:last-child) {
 			margin-right: 10px;

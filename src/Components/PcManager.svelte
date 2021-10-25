@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createNewPc } from '../utilities/characters';
-
-	import type { PlayerCharacter } from '../globals';
+	import type { PlayerCharacter } from '../types/avatar-legends';
 	import Card from './Card.svelte';
 	import Pc from './Pc.svelte';
 
@@ -39,8 +38,12 @@
 				<div class="Card-container">
 					<Card>
 						<div class="button-row">
-							<button on:click={() => handleErasePc(index)}>X</button>
-							<button on:click={() => handleResetPc(index)}>{'<-'}</button>
+							<button on:click={() => handleErasePc(index)}
+								>X</button
+							>
+							<button on:click={() => handleResetPc(index)}
+								>{'<-'}</button
+							>
 						</div>
 						<Pc {pc} />
 					</Card>

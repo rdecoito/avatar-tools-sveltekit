@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { NonPlayerCharacter } from '../globals';
-	import { NpcImportance } from '../globals';
+	import type { NonPlayerCharacter } from '../types/avatar-legends';
+	import { NpcImportance } from '../constants/avatar-legends';
 	import Npc from '../Components/Npc.svelte';
 	import Card from '../Components/Card.svelte';
 
@@ -15,7 +15,7 @@
 			drive: 'To ',
 			principle: '',
 			fatigue: 0,
-			balance: 0
+			balance: 0,
 		});
 
 		npcs = npcs;
@@ -45,8 +45,11 @@
 			<div class="Card-container">
 				<Card>
 					<div class="button-row">
-						<button on:click={() => handleEraseNpc(index)}>X</button>
-						<button on:click={() => handleResetNpc(index)}>{'<-'}</button>
+						<button on:click={() => handleEraseNpc(index)}>X</button
+						>
+						<button on:click={() => handleResetNpc(index)}
+							>{'<-'}</button
+						>
 					</div>
 					<Npc {npc} />
 				</Card>
@@ -66,7 +69,7 @@
 		}
 
 		.Card-container {
-			margin: 7px;
+			margin: var(--theme-space-separation);
 
 			.button-row {
 				position: absolute;

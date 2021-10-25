@@ -6,7 +6,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		%svelte.head%
 	</head>
-	<body style="background-color: #333">
+	<body>
 		<div id="svelte">%svelte.body%</div>
 	</body>
+	<style lang="scss">
+		input, select {
+			font-family: inherit;
+		}
+	
+		input.small {
+			width: 40px;
+		}
+	
+		input.medium {
+			width: 100px;
+		}
+
+		body {
+			background-color: var(--theme-colors-background);
+		}
+	</style>
 </html>

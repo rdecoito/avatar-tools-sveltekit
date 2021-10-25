@@ -1,4 +1,4 @@
-import type { NonPlayerCharacter, PlayerCharacter } from '../globals';
+import type { NonPlayerCharacter, PlayerCharacter } from '../types/avatar-legends';
 
 export const validateNpc = (npc: NonPlayerCharacter): boolean => {
 	npc as NonPlayerCharacter;
