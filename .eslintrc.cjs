@@ -3,12 +3,16 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	extends: [
 		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:@typescript-eslint/recommended-required-type-checking',
-		'prettier'
+		'plugin:@typescript-eslint/recommended'
 	],
 	plugins: ['svelte3', '@typescript-eslint'],
-	ignorePatterns: ['*.cjs'],
+	ignorePatterns: [
+		"node_modules",
+		"build",
+		".svelte-kit",
+		".netlify",
+		'*.cjs'
+	],
 	overrides: [
 		{
 			files: ['*.svelte'],
@@ -16,7 +20,8 @@ module.exports = {
 		}
 	],
 	settings: {
-		'svelte3/typescript': () => require('typescript')
+		'svelte3/typescript': () => require('typescript'),
+		'svelte3/ignore-styles': () => true
 	},
 	parserOptions: {
 		sourceType: 'module',
@@ -28,6 +33,12 @@ module.exports = {
 		node: true
 	},
 	rules: {
-		'@typescript-eslint/no-explicit-any': 0
+		"eqeqeq": ["error", "always", {
+			"null": "ignore"
+		}],
+		"no-console": "warn",
+		"no-undef": "off",
+		"no-fallthrough": "off",
+		"no-self-assign": "off", // svelte needs this for reactive stuff
 	}
 };

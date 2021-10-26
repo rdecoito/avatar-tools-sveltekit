@@ -1,7 +1,11 @@
 <script lang="ts">
-	import type { Fatigue, NonPlayerCharacter } from '../globals';
-	import { NpcImportance, NpcMaxStats } from '../globals';
-	import FakeCheckbox from './FakeCheckbox.svelte';
+	import type {
+		Condition,
+		Fatigue,
+		NonPlayerCharacter,
+	} from "../types/avatar-legends";
+	import { NpcImportance, NpcMaxStats } from "../constants/avatar-legends";
+	import FakeCheckbox from "./FakeCheckbox.svelte";
 
 	export let npc: NonPlayerCharacter;
 
@@ -32,7 +36,11 @@
 			npc.conditions.length = absoluteMax;
 		}
 		if (npc.conditions.length > maxStats.conditions) {
-			for (let i = maxStats.conditions as number; i < npc.conditions.length; i++) {
+			for (
+				let i = maxStats.conditions as number;
+				i < npc.conditions.length;
+				i++
+			) {
 				npc.conditions[i][1] = false;
 			}
 		}
@@ -43,13 +51,13 @@
 		const maxConds = NpcMaxStats[npc.importance].conditions;
 		let curCondsLen = npc.conditions?.length as number;
 		if (!npc.conditions) {
-			npc.conditions = [] as any;
+			npc.conditions = [] as Condition[];
 			curCondsLen = 0;
 		}
 
 		if (curCondsLen < maxConds) {
 			for (let i = curCondsLen; i < maxConds; i++) {
-				npc.conditions.push(['', false]);
+				npc.conditions.push(["", false]);
 			}
 		}
 	}
@@ -133,7 +141,12 @@
 		<div class="balance-track">
 			Balance
 			<div>
-				<input class="medium" type="text" bind:value={npc.principle} placeholder="Principle" />
+				<input
+					class="medium"
+					type="text"
+					bind:value={npc.principle}
+					placeholder="Principle"
+				/>
 				<input class="small" type="number" bind:value={npc.balance} />
 			</div>
 		</div>
@@ -141,18 +154,6 @@
 </div>
 
 <style lang="scss">
-	input {
-		font-family: inherit;
-	}
-
-	input.small {
-		width: 40px;
-	}
-
-	input.medium {
-		width: 100px;
-	}
-
 	hr {
 		align-self: center;
 		border: 0;
@@ -167,7 +168,8 @@
 		align-items: center;
 
 		max-width: 300px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+			sans-serif;
 
 		> :not(:last-child) {
 			margin-bottom: 5px;
