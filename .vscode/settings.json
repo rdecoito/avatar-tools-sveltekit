@@ -1,0 +1,11 @@
+{
+	"eslint.validate": [
+		"javascript",
+		"typescript",
+		"svelte"
+	],
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"css.lint.unknownAtRules": "ignore"
+}

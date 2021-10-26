@@ -1,12 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%svelte.head%
-	</head>
-	<body style="background-color: #333">
-		<div id="svelte">%svelte.body%</div>
-	</body>
+
+<head>
+	<title>Check Your Balance</title>
+	<meta charset="utf-8" />
+	<link rel="icon" href="/favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	%svelte.head%
+</head>
+
+<body>
+	<div id="svelte">%svelte.body%</div>
+</body>
+
 </html>
+
+<style lang="scss">
+	input,
+	select {
+		font-family: inherit;
+	}
+
+	input.small {
+		width: 40px;
+	}
+
+	input.medium {
+		width: 100px;
+	}
+
+	body {
+		background-color: var(--theme-colors-background);
+		margin: 0 0 0 0;
+	}
+
+	@mixin sm {
+		@media (max-width: 576px) {
+			@content;
+		}
+	}
+
+	@mixin md {
+		@media (min-width: 577px) {
+			@content;
+		}
+	}
+</style>

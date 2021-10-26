@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from "svelte";
 
-	export let checked: boolean = false;
+	export let checked = false;
 
 	const dispatch = createEventDispatcher();
 
 	function forward(event: UIEvent) {
-		dispatch('click', event.detail);
+		dispatch("click", event.detail);
 	}
 </script>
 

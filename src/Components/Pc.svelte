@@ -1,6 +1,10 @@
 <script lang="ts">
-	import type { PlayerCharacter } from '../globals';
-	import { Playbook, Training, PcMaxStats } from '../globals';
+	import type { PlayerCharacter } from '../types/avatar-legends';
+	import {
+		Playbook,
+		Training,
+		PcMaxStats,
+	} from '../constants/avatar-legends';
 	import FakeCheckbox from './FakeCheckbox.svelte';
 
 	export let pc: PlayerCharacter;
@@ -63,7 +67,12 @@
 			{/each}
 		</select>
 
-		<input class="medium" type="text" bind:value={pc.name} placeholder="Name" />
+		<input
+			class="medium"
+			type="text"
+			bind:value={pc.name}
+			placeholder="Name"
+		/>
 
 		<select class="medium" bind:value={pc.training}>
 			{#each Object.values(Training) as training}
@@ -73,7 +82,12 @@
 			{/each}
 		</select>
 
-		<input class="medium" type="text" bind:value={pc.fightingStyle} placeholder="Fighting Style" />
+		<input
+			class="medium"
+			type="text"
+			bind:value={pc.fightingStyle}
+			placeholder="Fighting Style"
+		/>
 	</div>
 
 	<hr aria-hidden="true" />
@@ -82,22 +96,38 @@
 		<div class="left">
 			<div>
 				Creativity&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.creativity} />
+				<input
+					class="small"
+					type="number"
+					bind:value={pc.stats.creativity}
+				/>
 			</div>
 			<div>
 				Focus&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.focus} />
+				<input
+					class="small"
+					type="number"
+					bind:value={pc.stats.focus}
+				/>
 			</div>
 		</div>
 
 		<div class="right">
 			<div>
 				Harmony&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.harmony} />
+				<input
+					class="small"
+					type="number"
+					bind:value={pc.stats.harmony}
+				/>
 			</div>
 			<div>
 				Passion&nbsp;
-				<input class="small" type="number" bind:value={pc.stats.passion} />
+				<input
+					class="small"
+					type="number"
+					bind:value={pc.stats.passion}
+				/>
 			</div>
 		</div>
 	</div>
@@ -107,7 +137,10 @@
 			Fatigue
 			{#each [1, 2, 3, 4, 5] as index (index)}
 				<div>
-					<FakeCheckbox on:click={() => handleFatigueClick(index)} checked={index <= pc.fatigue} />
+					<FakeCheckbox
+						on:click={() => handleFatigueClick(index)}
+						checked={index <= pc.fatigue}
+					/>
 				</div>
 			{/each}
 		</div>
@@ -151,26 +184,16 @@
 		Growth
 		{#each [1, 2, 3, 4] as index (index)}
 			<div>
-				<FakeCheckbox on:click={() => handleGrowthClick(index)} checked={index <= pc.growth} />
+				<FakeCheckbox
+					on:click={() => handleGrowthClick(index)}
+					checked={index <= pc.growth}
+				/>
 			</div>
 		{/each}
 	</div>
 </div>
 
 <style lang="scss">
-	input,
-	select {
-		font-family: inherit;
-	}
-
-	input.small {
-		width: 40px;
-	}
-
-	input.medium {
-		width: 100px;
-	}
-
 	hr {
 		align-self: center;
 		border: 0;
@@ -186,7 +209,8 @@
 		align-items: center;
 
 		max-width: 300px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+			sans-serif;
 
 		> :not(hr):not(:last-child) {
 			margin-bottom: 5px;
