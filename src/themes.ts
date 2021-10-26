@@ -4,14 +4,14 @@ export default {
 	// 		text: '#282230',
 	// 		background: '#f1f1f1'
 	// 	}
-
 	// },
 	dark: {
 		colors: {
 			text: '#f1f1f1',
 			background: {
 				_: '#27323a',
-				contrast: '#0d1215'
+				contrast: '#0d1215',
+				accent: '#172e33' //'#172833'
 			},
 			primary: '#01978b',
 			primary_dark: '#00887c',

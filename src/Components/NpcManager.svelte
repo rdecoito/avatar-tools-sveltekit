@@ -1,19 +1,19 @@
 <script lang="ts">
-	import type { NonPlayerCharacter } from '../types/avatar-legends';
-	import { NpcImportance } from '../constants/avatar-legends';
-	import Npc from '../Components/Npc.svelte';
-	import Card from '../Components/Card.svelte';
+	import type { NonPlayerCharacter } from "../types/avatar-legends";
+	import { NpcImportance } from "../constants/avatar-legends";
+	import Npc from "../Components/Npc.svelte";
+	import Card from "../Components/Card.svelte";
 
 	export let npcs: Array<NonPlayerCharacter>;
-	export let row: boolean = true;
+	export let row = true;
 
 	const handleNewNpc = () => {
 		npcs.push({
-			name: '',
+			name: "",
 			importance: NpcImportance.MINOR,
-			conditions: [['', false]],
-			drive: 'To ',
-			principle: '',
+			conditions: [],
+			drive: "To ",
+			principle: "",
 			fatigue: 0,
 			balance: 0,
 		});
@@ -37,7 +37,7 @@
 	};
 </script>
 
-<div>
+<div class="manager-container">
 	<button on:click={handleNewNpc} class="new-npc-btn">+ New NPC</button>
 
 	<div class="npcs-block" class:row>
@@ -48,7 +48,7 @@
 						<button on:click={() => handleEraseNpc(index)}>X</button
 						>
 						<button on:click={() => handleResetNpc(index)}
-							>{'<-'}</button
+							>{"<-"}</button
 						>
 					</div>
 					<Npc {npc} />
@@ -59,13 +59,21 @@
 </div>
 
 <style lang="scss">
+	div.manager-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
 	.npcs-block {
 		display: flex;
 		flex-flow: column;
-		align-items: flex-start;
+		align-items: center;
 
 		&.row {
 			flex-flow: row wrap;
+			justify-content: center;
 		}
 
 		.Card-container {

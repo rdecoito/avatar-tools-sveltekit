@@ -1,7 +1,11 @@
 <script lang="ts">
-	import type { Fatigue, NonPlayerCharacter } from '../types/avatar-legends';
-	import { NpcImportance, NpcMaxStats } from '../constants/avatar-legends';
-	import FakeCheckbox from './FakeCheckbox.svelte';
+	import type {
+		Condition,
+		Fatigue,
+		NonPlayerCharacter,
+	} from "../types/avatar-legends";
+	import { NpcImportance, NpcMaxStats } from "../constants/avatar-legends";
+	import FakeCheckbox from "./FakeCheckbox.svelte";
 
 	export let npc: NonPlayerCharacter;
 
@@ -47,13 +51,13 @@
 		const maxConds = NpcMaxStats[npc.importance].conditions;
 		let curCondsLen = npc.conditions?.length as number;
 		if (!npc.conditions) {
-			npc.conditions = [] as any;
+			npc.conditions = [] as Condition[];
 			curCondsLen = 0;
 		}
 
 		if (curCondsLen < maxConds) {
 			for (let i = curCondsLen; i < maxConds; i++) {
-				npc.conditions.push(['', false]);
+				npc.conditions.push(["", false]);
 			}
 		}
 	}
@@ -164,7 +168,7 @@
 		align-items: center;
 
 		max-width: 300px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+		font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
 			sans-serif;
 
 		> :not(:last-child) {

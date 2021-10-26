@@ -20,7 +20,8 @@ module.exports = {
 		}
 	],
 	settings: {
-		'svelte3/typescript': () => require('typescript')
+		'svelte3/typescript': () => require('typescript'),
+		'svelte3/ignore-styles': () => true
 	},
 	parserOptions: {
 		sourceType: 'module',
@@ -32,7 +33,9 @@ module.exports = {
 		node: true
 	},
 	rules: {
-		"eqeqeq": "error",
+		"eqeqeq": ["error", "always", {
+			"null": "ignore"
+		}],
 		"no-console": "warn",
 		"no-undef": "off",
 		"no-fallthrough": "off",
