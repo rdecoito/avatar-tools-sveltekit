@@ -1,1 +1,1 @@
-export const APP_STATE_VERSION: number = 1;
+export const APP_STATE_VERSION = 1;
