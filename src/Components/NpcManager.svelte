@@ -38,24 +38,20 @@
 </script>
 
 <div class="manager-container">
-	<button on:click={handleNewNpc} class="new-npc-btn">+ New NPC</button>
+	<button on:click={handleNewNpc} class="new-npc-btn">
+		<i class="fas fa-plus-circle" /> New NPC
+	</button>
 
 	<div class="npcs-block" class:row>
 		{#each npcs as npc, index (npc)}
 			<div class="Card-container">
 				<Card>
 					<div class="button-row">
-						<button
-							class="small"
-							on:click={() => handleEraseNpc(index)}
-						>
-							x
+						<button on:click={() => handleEraseNpc(index)}>
+							<i class="fas fa-times" />
 						</button>
-						<button
-							class="small"
-							on:click={() => handleResetNpc(index)}
-						>
-							{"⟳"}
+						<button on:click={() => handleResetNpc(index)}>
+							<i class="fas fa-undo" />
 						</button>
 					</div>
 					<Npc {npc} />

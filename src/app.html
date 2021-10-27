@@ -6,6 +6,8 @@
 	<meta charset="utf-8" />
 	<link rel="icon" href="/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script defer src="/node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
+	<script defer src="/node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
 	%svelte.head%
 </head>
 
@@ -52,10 +54,12 @@
 		width: 8px;
 	}
 
+	/* chrome, edge, safari */
 	*::-webkit-scrollbar-track {
 		background: none;
 	}
 
+	/* chrome, edge, safari */
 	*::-webkit-scrollbar-thumb {
 		background-color: var(--theme-colors-background-contrast);
 		border-radius: 15px;

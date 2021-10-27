@@ -82,8 +82,12 @@
 	style="display: none"
 />
 
-<button style="display: block" on:click={handleImportClick}>Import Data</button>
-<button style="display: block" on:click={handleSaveClick}>Save Data</button>
+<button style="display: block" on:click={handleImportClick}>
+	<i class="fas fa-upload" />
+</button>
+<button style="display: block" on:click={handleSaveClick}>
+	<i class="fas fa-download" />
+</button>
 
 <style lang="scss">
 	button:not(:last-child) {
