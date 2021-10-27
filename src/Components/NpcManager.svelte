@@ -45,11 +45,18 @@
 			<div class="Card-container">
 				<Card>
 					<div class="button-row">
-						<button on:click={() => handleEraseNpc(index)}>X</button
+						<button
+							class="small"
+							on:click={() => handleEraseNpc(index)}
 						>
-						<button on:click={() => handleResetNpc(index)}
-							>{"<-"}</button
+							x
+						</button>
+						<button
+							class="small"
+							on:click={() => handleResetNpc(index)}
 						>
+							{"⟳"}
+						</button>
 					</div>
 					<Npc {npc} />
 				</Card>

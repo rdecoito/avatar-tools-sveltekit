@@ -20,23 +20,27 @@
 <div class="manager-switcher">
 	<div
 		class:highlighted={show === SHOW_PLAYERS}
-		on:click={() => (show = SHOW_PLAYERS)}
+		on:click={() => {
+			show = SHOW_PLAYERS;
+		}}
 	>
 		Players
 	</div>
 	<div
 		class:highlighted={show === SHOW_NPCS}
-		on:click={() => (show = SHOW_NPCS)}
+		on:click={() => {
+			show = SHOW_NPCS;
+		}}
 	>
 		NPCs
 	</div>
 </div>
 
 <div class="top">
-	<div class:small-shown={show === SHOW_PLAYERS}>
+	<div class:not-shown={show !== SHOW_PLAYERS}>
 		<PcManager bind:pcs={$pcStore} row={true} />
 	</div>
-	<div class:small-shown={show === SHOW_NPCS}>
+	<div class:not-shown={show !== SHOW_NPCS}>
 		<NpcManager bind:npcs={$npcStore} row={true} />
 	</div>
 </div>
@@ -51,7 +55,7 @@
 			min-height: 100%;
 			padding: var(--theme-space-separation);
 
-			> div.small-shown {
+			> div.not-shown {
 				display: none;
 			}
 		}
@@ -63,7 +67,7 @@
 			align-items: center;
 
 			position: sticky;
-			bottom: 0;
+			top: 0px;
 			height: 2em;
 			width: 100%;
 

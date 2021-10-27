@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { PlayerCharacter } from '../types/avatar-legends';
+	import type { PlayerCharacter } from "../types/avatar-legends";
 	import {
 		Playbook,
 		Training,
 		PcMaxStats,
-	} from '../constants/avatar-legends';
-	import FakeCheckbox from './FakeCheckbox.svelte';
+	} from "../constants/avatar-legends";
+	import FakeCheckbox from "./FakeCheckbox.svelte";
 
 	export let pc: PlayerCharacter;
 
@@ -26,12 +26,12 @@
 	};
 
 	$: if (
-		typeof pc.stats === 'object' &&
-		typeof pc.growth === 'number' &&
-		typeof pc.balance === 'number' &&
+		typeof pc.stats === "object" &&
+		typeof pc.growth === "number" &&
+		typeof pc.balance === "number" &&
 		Array.isArray(pc.conditions)
 	) {
-		['creativity', 'focus', 'harmony', 'passion'].forEach((stat) => {
+		["creativity", "focus", "harmony", "passion"].forEach((stat) => {
 			if (pc.stats[stat] > PcMaxStats.stats) {
 				pc.stats[stat] = PcMaxStats.stats;
 			} else if (pc.stats[stat] < -PcMaxStats.stats) {
@@ -209,8 +209,6 @@
 		align-items: center;
 
 		max-width: 300px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-			sans-serif;
 
 		> :not(hr):not(:last-child) {
 			margin-bottom: 5px;

@@ -39,12 +39,18 @@
 				<div class="Card-container">
 					<Card>
 						<div class="button-row">
-							<button on:click={() => handleErasePc(index)}
-								>X</button
+							<button
+								class="small"
+								on:click={() => handleErasePc(index)}
 							>
-							<button on:click={() => handleResetPc(index)}
-								>{"<-"}</button
+								x
+							</button>
+							<button
+								class="small"
+								on:click={() => handleResetPc(index)}
 							>
+								{"⟳"}
+							</button>
 						</div>
 						<Pc {pc} />
 					</Card>

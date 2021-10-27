@@ -168,8 +168,6 @@
 		align-items: center;
 
 		max-width: 300px;
-		font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-			sans-serif;
 
 		> :not(:last-child) {
 			margin-bottom: 5px;
