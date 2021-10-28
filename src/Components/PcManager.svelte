@@ -31,7 +31,9 @@
 </script>
 
 <div class="manager-container">
-	<button on:click={handleNewPc} class="new-npc-btn">+ New PC</button>
+	<button on:click={handleNewPc} class="new-npc-btn">
+		<i class="fas fa-plus-circle" /> New PC
+	</button>
 
 	<div class="pcs-block" class:row>
 		{#if Array.isArray(pcs)}
@@ -39,12 +41,12 @@
 				<div class="Card-container">
 					<Card>
 						<div class="button-row">
-							<button on:click={() => handleErasePc(index)}
-								>X</button
-							>
-							<button on:click={() => handleResetPc(index)}
-								>{"<-"}</button
-							>
+							<button on:click={() => handleErasePc(index)}>
+								<i class="fas fa-times" />
+							</button>
+							<button on:click={() => handleResetPc(index)}>
+								<i class="fas fa-undo" />
+							</button>
 						</div>
 						<Pc {pc} />
 					</Card>

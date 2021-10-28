@@ -18,6 +18,7 @@
 		"@typescript-eslint/parser": "^4.31.1",
 		"eslint": "^7.32.0",
 		"eslint-plugin-svelte3": "^3.2.1",
+		"mdsvex": "^0.9.8",
 		"stream": "^0.0.2",
 		"svelte": "^3.42.6",
 		"svelte-check": "^2.2.7",
@@ -26,6 +27,7 @@
 		"typescript": "^4.4.4"
 	},
 	"dependencies": {
+		"@fortawesome/fontawesome-free": "^5.15.4",
 		"sass": "^1.43.3",
 		"sass-loader": "^12.2.0",
 		"svelte-themer": "^0.4.13"
