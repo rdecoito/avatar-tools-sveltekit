@@ -7,7 +7,10 @@ export default {
 	// },
 	dark: {
 		colors: {
-			text: '#f1f1f1',
+			text: {
+				_: '#f1f1f1',
+				contrast: '#699fc6'
+			},
 			background: {
 				_: '#27323a',
 				contrast: '#0d1215',
