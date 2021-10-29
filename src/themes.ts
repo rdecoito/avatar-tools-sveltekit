@@ -6,6 +6,9 @@ export default {
 	// 	}
 	// },
 	dark: {
+		zindex: {
+			background: '-5'
+		},
 		colors: {
 			text: {
 				_: '#f1f1f1',
