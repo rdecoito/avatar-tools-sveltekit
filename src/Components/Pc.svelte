@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
 	import type { PlayerCharacter } from "../types/avatar-legends";
 	import {
 		Playbook,
@@ -8,6 +9,24 @@
 	import FakeCheckbox from "./FakeCheckbox.svelte";
 
 	export let pc: PlayerCharacter;
+
+	const dispatch = createEventDispatcher<{
+		'pc-reset': void;
+		'pc-delete': void;
+		'pc-reorder': { up: boolean };
+	}>();
+
+	const handleReset = () => {
+		dispatch('pc-reset')
+	}
+
+	const handleDelete = () => {
+		dispatch('pc-delete');
+	}
+
+	const handleReorder = (up: boolean) => {
+		dispatch('pc-reorder', { up });
+	}
 
 	const handleFatigueClick = (newFatigue: number) => {
 		if (newFatigue === pc.fatigue) {
@@ -58,6 +77,25 @@
 </script>
 
 <div class="pc-container">
+	<div class="pc-buttons">
+		<div class="button-row">
+			<button on:click={handleDelete}>
+				<i class="fas fa-times" />
+			</button>
+			<button on:click={handleReset}>
+				<i class="fas fa-undo" />
+			</button>
+		</div>
+		<div class="button-row">
+			<button on:click={() => handleReorder(true)}>
+				<i class="fas fa-chevron-up" />
+			</button>
+			<button on:click={() => handleReorder(false)}>
+				<i class="fas fa-chevron-down" />
+			</button>
+		</div>
+	</div>
+
 	<div class="info-block">
 		<select class="medium" bind:value={pc.playbook}>
 			{#each Object.values(Playbook) as playbook}
@@ -205,13 +243,26 @@
 
 	.pc-container {
 		display: flex;
+		position: relative;
 		flex-flow: column nowrap;
 		align-items: center;
 
 		max-width: 300px;
 
-		> :not(hr):not(:last-child) {
+		> :not(hr):not(.pc-buttons):not(:last-child) {
 			margin-bottom: 5px;
+		}
+
+		.pc-buttons {
+			display: flex;
+			position: absolute;
+			justify-content: space-between;
+			width: 100%;
+			padding: 0 var(--theme-space-separation);
+
+			.button-row {
+				display: flex;
+			}
 		}
 
 		.info-block {

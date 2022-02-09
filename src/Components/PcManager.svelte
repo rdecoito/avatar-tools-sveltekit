@@ -19,6 +19,14 @@
 		pcs = pcs;
 	};
 
+	const handleReorderPc = (index: number, up: boolean) => {
+		const [pcToMove] = pcs.splice(index, 1);
+		let newIndex = up ? Math.max(index - 1, 0) : Math.min(index + 1, pcs.length);
+		pcs.splice(newIndex, 0, pcToMove);
+
+		pcs = pcs;
+	}
+
 	const handleResetPc = (index: number) => {
 		const pc = pcs[index];
 		pc.fatigue = 0;
@@ -38,17 +46,14 @@
 	<div class="pcs-block" class:row>
 		{#if Array.isArray(pcs)}
 			{#each pcs as pc, index (pc)}
-				<div class="Card-container">
+				<div class="card-container">
 					<Card>
-						<div class="button-row">
-							<button on:click={() => handleErasePc(index)}>
-								<i class="fas fa-times" />
-							</button>
-							<button on:click={() => handleResetPc(index)}>
-								<i class="fas fa-undo" />
-							</button>
-						</div>
-						<Pc {pc} />
+						<Pc
+							{pc} 
+							on:pc-delete={() => handleErasePc(index)}
+							on:pc-reset={() => handleResetPc(index)}
+							on:pc-reorder={(evt) => handleReorderPc(index, evt.detail.up)}
+						/>
 					</Card>
 				</div>
 			{/each}
@@ -74,12 +79,8 @@
 			justify-content: center;
 		}
 
-		.Card-container {
+		.card-container {
 			margin: var(--theme-space-separation);
-
-			.button-row {
-				position: absolute;
-			}
 		}
 	}
 </style>

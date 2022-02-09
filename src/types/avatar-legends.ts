@@ -11,7 +11,6 @@ export type Fatigue<T extends NpcImportance> = T extends NpcImportance.MINOR
 	: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export type Condition = [string, boolean];
-export type Conditions = Array<Condition>;
 
 export type Balance<T extends NpcImportance> = T extends NpcImportance.MINOR
 	? 0 | 1
@@ -29,7 +28,7 @@ export interface NonPlayerCharacter<T extends NpcImportance = NpcImportance> {
 	/** The drive the NPC works toward. Must be in the format 'To <something>' */
 	drive: `To ${string}`;
 	/** A mapping between the names of possible conditions and whether the condition is marked */
-	conditions: Conditions;
+	conditions: Array<Condition>;
 	/** The amount of fatigue the NPC has marked */
 	fatigue: Fatigue<T>;
 	/** The position of the NPCs balance in the direction of their principle */
