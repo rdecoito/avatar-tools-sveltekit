@@ -6,8 +6,27 @@
 	} from "../types/avatar-legends";
 	import { NpcImportance, NpcMaxStats } from "../constants/avatar-legends";
 	import FakeCheckbox from "./FakeCheckbox.svelte";
+	import { createEventDispatcher } from "svelte";
 
 	export let npc: NonPlayerCharacter;
+
+	const dispatch = createEventDispatcher<{
+		'npc-reset': void;
+		'npc-delete': void;
+		'npc-reorder': { up: boolean };
+	}>();
+
+	const handleReset = () => {
+		dispatch('npc-reset')
+	}
+
+	const handleDelete = () => {
+		dispatch('npc-delete');
+	}
+
+	const handleReorder = (up: boolean) => {
+		dispatch('npc-reorder', { up });
+	}
 
 	const handleFatigueClick = (index: number) => {
 		if (npc.fatigue === index) {
@@ -80,6 +99,25 @@
 </script>
 
 <div class="npc-container">
+	<div class="npc-buttons">
+		<div class="button-row">
+			<button on:click={handleDelete}>
+				<i class="fas fa-times" />
+			</button>
+			<button on:click={handleReset}>
+				<i class="fas fa-undo" />
+			</button>
+		</div>
+		<div class="button-row">
+			<button on:click={() => handleReorder(true)}>
+				<i class="fas fa-chevron-up" />
+			</button>
+			<button on:click={() => handleReorder(false)}>
+				<i class="fas fa-chevron-down" />
+			</button>
+		</div>
+	</div>
+
 	<div class="info-block">
 		<div>
 			<select id="importance" bind:value={npc.importance}>
@@ -164,13 +202,26 @@
 
 	.npc-container {
 		display: flex;
+		position: relative;
 		flex-flow: column nowrap;
 		align-items: center;
 
 		max-width: 300px;
 
-		> :not(:last-child) {
+		> :not(.npc-buttons):not(:last-child) {
 			margin-bottom: 5px;
+		}
+
+		.npc-buttons {
+			display: flex;
+			position: absolute;
+			justify-content: space-between;
+			width: 100%;
+			padding: 0 var(--theme-space-separation);
+
+			.button-row {
+				display: flex;
+			}
 		}
 
 		.info-block {

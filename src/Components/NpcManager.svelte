@@ -21,6 +21,14 @@
 		npcs = npcs;
 	};
 
+	const handleReorderNpc = (index: number, up: boolean) => {
+		const [pcToMove] = npcs.splice(index, 1);
+		let newIndex = up ? Math.max(index - 1, 0) : Math.min(index + 1, npcs.length);
+		npcs.splice(newIndex, 0, pcToMove);
+
+		npcs = npcs;
+	}
+
 	const handleResetNpc = (index: number) => {
 		const npc = npcs[index];
 		npc.fatigue = 0;
@@ -46,21 +54,18 @@
 		{#each npcs as npc, index (npc)}
 			<div class="Card-container">
 				<Card>
-					<div class="button-row">
-						<button on:click={() => handleEraseNpc(index)}>
-							<i class="fas fa-times" />
-						</button>
-						<button on:click={() => handleResetNpc(index)}>
-							<i class="fas fa-undo" />
-						</button>
-					</div>
-					<Npc {npc} />
+					<Npc
+						{npc}
+						on:npc-delete={() => handleEraseNpc(index)}
+						on:npc-reset={() => handleResetNpc(index)}
+						on:npc-reorder={(evt) => handleReorderNpc(index, evt.detail.up)}
+					/>
 				</Card>
 			</div>
 		{/each}
 	</div>
 </div>
-
+ 
 <style lang="scss">
 	div.manager-container {
 		display: flex;
@@ -81,10 +86,6 @@
 
 		.Card-container {
 			margin: var(--theme-space-separation);
-
-			.button-row {
-				position: absolute;
-			}
 		}
 	}
 </style>
